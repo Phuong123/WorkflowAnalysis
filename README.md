@@ -31,3 +31,11 @@ You can also embed plots, for example:
 ![](images/pressure-1.png)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+You can convert markdown to other format easily using Pandoc in Rstudio.
+```r
+library(knitr)
+pandoc('input.md', format = 'latex')
+pandoc('input.md', format = 'htmpl')
+pandoc('input.md', format = 'pdf')
+```
