@@ -3,10 +3,17 @@ title: "Graph in R"
 output: github_document
 ---
 
-## GitHub Documents
+## Creating Graphs with ggplot 
 
-This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+This is a summary for essential graph techniques in R. In this work, we will consider how to create graphs using ggplot. There are some basic steps those we should focus on plotting a graph.
 
+* Setting up variables for plotting
+* Adding color, symplol type, size and shape as layers
+* Controlling plotting backgrounds and margins
+* Creating line graphs, histograms, bar charts, and boxplots
+* Using attractive color schemes
+
+The aim of this report is to provide a basic principle behind the creation of graphic graphs in ggplot.
 ## Including Code
 
 You can include R code in the document as follows:
