@@ -9,6 +9,7 @@ This is a summary for essential graph techniques in R. In this work, we will con
 * Using attractive color schemes
 
 The aim of this report is to provide a basic principle behind the creation of graphic graphs in ggplot.
+
 ## Including Code
 
 You can include R code in the document as follows:
