@@ -1,8 +1,3 @@
----
-title: "Graph in R"
-output: github_document
----
-
 ## Creating Graphs with ggplot 
 
 This is a summary for essential graph techniques in R. In this work, we will consider how to create graphs using ggplot. There are some basic steps those we should focus on plotting a graph.
