@@ -13,6 +13,8 @@ The aim of this report is to provide a basic principle behind the creation of gr
 
 You can include R code in the document as follows:
 
+# Start to code with R
+
 
 ```r
 summary(cars)
