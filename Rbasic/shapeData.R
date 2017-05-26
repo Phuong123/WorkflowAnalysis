@@ -1,8 +1,8 @@
 library(gcookbook)
 
-# shapping your data
+# Shapping your data
 
-###############################
+############################### Some basic manipulation ############################### 
 
 # get information about dataset : heightweight
 str(heightweight)
@@ -33,20 +33,15 @@ dataframe <- dataframe[c(1,3,2)]
 ## OR using column name
 dataframe <- dataframe[c("Name", "Time", "Value")]
 
-###############################
-
 # subset the data
-# using dataset : climate (in library gcookbook)
+## using dataset : climate (in library gcookbook)
 subset(climate, Source == "Berkeley", select = c(Year, Anomaly10y))
 subset(climate, Source == "Berkeley" & Year >= 1990 & Year <= 2000, select = c(Year, Anomaly10y))
 ## OR 
 climate[1:10,c(2,5)]
 
-###############################
-
 # changing the order
 ## order of levels in a factor
-
 sizes <- factor(c("small","large","large","small","medium", "xlarge"))
 sizes
 
@@ -95,8 +90,6 @@ pg$treatment[pg$group == "trt2"] <- "yes"
 
 pg$treatment <- factor(pg$treatment)
 
-
-###############################
 # Recoding a Continuous Variable
 # use the above pg 
 pg$wtclass <- cut(pg$weight,breaks = c(0,5,6,Inf))
@@ -105,25 +98,23 @@ pg
 pg$wtclass <- cut(pg$weight,breaks = c(0,5,6,Inf), labels = c("Small","Medium","Large"))
 pg
 
-
-
 ############################### 15.17
 # Transforming Variables
+library(plyr)
+library(MASS)
+library(ggplot2)
 
 hw <- heightweight
 hw
-
 hw$heightCM <- hw$heightIn*2.54
 hw
 
 # Transforming Variables by Group
-library(plyr)
-library(MASS)
-library(ggplot2)
 cabbages
 cb <- transform(cabbages, DevWt = HeadWt - mean(HeadWt))
 cb
 ggplot(cb, aes(x=Cult, y=HeadWt)) + geom_boxplot()
+
 ## for separate group in Cult : c39 and c52
 cb <- ddply(cabbages, "Cult", transform, DevWt = HeadWt - mean(HeadWt))
 cb
@@ -135,5 +126,55 @@ ddply(cabbages, c("Cult", "Date"), summarise, Weight = mean(HeadWt),VitC = mean(
 # dealing with NAs
 c1 <- cabbages
 c1$HeadWt[c(1,20,45)] <- NA
-
 ddply(c1,c("Cult","Date"), summarise, Weight = mean(HeadWt,na.rm = TRUE), sd = sd(HeadWt,na.rm = TRUE), n = length(HeadWt))
+
+############################### 
+# Summarizing Data with Standard errors and confidence intervals
+library(MASS)
+library(plyr)
+
+ca <- ddply(cabbages, c("Cult", "Date"), summarise        ,
+            Weight = mean(HeadWt, na.rm = TRUE),
+            sd = sd(HeadWt, na.rm = TRUE),
+            n = sum(!is.na(HeadWt )),
+            se = sd/sqrt(n))
+ca
+
+
+## multiplier
+ciMult <- qt(.975, ca$n-1)
+ciMult
+
+ca$ci <- ca$se * ciMult
+ca
+
+
+############################### 
+# Coverting Data from Wide to Long
+# Use melt() from reshape2 package
+
+anthoming
+library(reshape2)
+melt(anthoming,id.vars="angle", variable.names="conditions",value.name = "count")
+
+# Coverting Data from long to Wide
+# Use dcast() from reshape2
+plum
+library(reshape2)
+dcast(plum, length + time ~ survival, value.var = "count")
+
+############################### 
+# Converting a Time Series to Times and Values
+nhtemp
+# Use time(), convert times & values to numeric vectors with as.numeric()
+
+yearData  <- as.numeric(time(nhtemp))
+valueData <- as.numeric(nhtemp)
+## put to data frame
+nht <- data.frame(year=yearData, temp=valueData)
+nht
+
+############################### ggplot2 a review ############################### 
+
+
+
