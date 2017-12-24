@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Regression Report
 
 ```{r echo=FALSE, results='hide'}
@@ -16,7 +21,10 @@ accounted for `r round(sfit$r.squared,2)`% of the variance in weights. The ANOVA
 ```{r echo=FALSE, results='asis'}
 library(xtable)
 options(xtable.comment=FALSE)
-print(xtable(sfit), type="html", html.table.attributes="border=0")
+# html
+# print(xtable(sfit), type="html", html.table.attributes="border=0")
+# pdf
+print(xtable(sfit), type = "latex")
 ```
 
 The regression is plotted in the following figure.
