@@ -28,10 +28,10 @@ knit2pdf("RandLaTex.Rnw")
 
 ## Creating dynamic reports with R and OpenOffice
 # you will need to have OpenOffice (http://www.openoffice.org) installed
-library(odfWeave)
-infile <- "salaryTemplate.odt"
-outfile <- "salaryReport.odt"
-odfWeave(infile, outfile)
+# library(odfWeave)
+# infile <- "salaryTemplate.odt"
+# outfile <- "salaryReport.odt"
+# odfWeave(infile, outfile)
 
 
 
