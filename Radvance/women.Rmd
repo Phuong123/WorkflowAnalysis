@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Regression Report
 
 ```{r echo=FALSE, results='hide'}
@@ -19,12 +14,18 @@ Linear regression was used to model the relationship between weights and height 
 accounted for `r round(sfit$r.squared,2)`% of the variance in weights. The ANOVA table is given below.
 
 ```{r echo=FALSE, results='asis'}
-library(xtable)
-options(xtable.comment=FALSE)
+# library(xtable)
+# options(xtable.comment=FALSE)
 # html
 # print(xtable(sfit), type="html", html.table.attributes="border=0")
 # pdf
-print(xtable(sfit), type = "latex")
+# print(xtable(sfit), type = "latex")
+
+# ms word
+# replace xtable by knitr and kable
+library(knitr)
+kable(sfit$coefficients)
+
 ```
 
 The regression is plotted in the following figure.

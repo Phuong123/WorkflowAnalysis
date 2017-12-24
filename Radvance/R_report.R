@@ -10,10 +10,10 @@ library(rmarkdown)
 setwd("~/rworkspace/WorkflowAnalysis/Radvance/")
 
 # Use html format
-render("women.Rmd", "html_document") 
+# render("women.Rmd", "html_document") 
 
 # Use pdf format - change corresponding text in Rmd
-render("women.Rmd", "pdf_document") 
+# render("women.Rmd", "pdf_document") 
 
 # Use docx format - change corresponding text in Rmd
 render("women.Rmd", "word_document") 
