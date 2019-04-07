@@ -65,6 +65,9 @@ Once the model is developed it is deployed in a real-time setting for a given ap
 
 #### Rapid Miner
 
+**Examples**
+------------
+
 ``` r
 summary(cars)
 ```
@@ -77,8 +80,8 @@ summary(cars)
     ##  3rd Qu.:19.0   3rd Qu.: 56.00  
     ##  Max.   :25.0   Max.   :120.00
 
-Ploting with ggplot2
---------------------
+**Ploting and ggplot2**
+-----------------------
 
 You can also embed plots, for example:
 
