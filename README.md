@@ -52,6 +52,7 @@ This summation expression is in display form.
 
 $$\sum_{i=1}^n X_i$$
 
+<<<<<<< HEAD
 This math is inline $`a^2+b^2=c^2`$.
 
 This is on a separate line
@@ -59,3 +60,5 @@ This is on a separate line
 a^2+b^2=c^2
 ```
 
+=======
+>>>>>>> 694449a52c453b61a9db23d6d2bde805fcd287a4
