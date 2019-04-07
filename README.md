@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 Workflow
 ================
 
@@ -39,3 +44,11 @@ pandoc('input.md', format = 'latex')
 pandoc('input.md', format = 'htmpl')
 pandoc('input.md', format = 'pdf')
 ```
+
+This summation expression $\sum_{i=1}^n X_i$ appears inline.
+
+
+This summation expression is in display form.
+
+$$\sum_{i=1}^n X_i$$
+
