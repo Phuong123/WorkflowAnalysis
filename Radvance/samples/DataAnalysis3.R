@@ -354,7 +354,7 @@ library(ggplot2)
 library(grid)
 library(png)
 
-img <- png::readPNG("/Users/phuong/rworkspace/WorkflowAnalysis/Radvance/phuong.png")  # source: https://www.r-project.org/
+img <- png::readPNG("/Users/phuong/rworkspace/WorkflowAnalysis/Radvance/samples/phuong.png")  # source: https://www.r-project.org/
 g_pic <- rasterGrob(img, interpolate=TRUE)
 
 # Base Plot
