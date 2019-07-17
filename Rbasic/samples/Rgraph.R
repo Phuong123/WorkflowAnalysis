@@ -4,10 +4,6 @@ setwd("~/javaprogs/jMetal")
 a <- read.table("FUN.tsv")
 plot(a)
 
-
-
-
-
 ####### Data Analysis #######
 
 setwd("/Users/phuong")
