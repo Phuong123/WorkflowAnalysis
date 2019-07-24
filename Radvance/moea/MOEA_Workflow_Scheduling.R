@@ -1,14 +1,16 @@
 # Read Data and Preliminary Process
 
 # Set working directory 
-setwd("/Users/phuong/rworkspace/WorkflowAnalysis/Radvance/moea")
+setwd("/Users/phuong/rworkspace/WorkflowAnalysis/Radvance/moea/montagedata")
 
 ## Use SQLite Database
 library(DBI)
 library(RSQLite)
 
 ## connect to databases --> should be improved using loop
-databaseNames = c("scheduleTests","evolutionTest")
+
+#databaseNames = c("Montage_Exp1","Montage_Exp2","Montage_Exp3","Montage_Exp4","Montage_Exp5")
+databaseNames = c("workflowExperiments4")
 
 ## Prepare query functions
 ## query data function
@@ -16,10 +18,9 @@ databaseNames = c("scheduleTests","evolutionTest")
 query_data_from_database <- function(database) {
   tempData <- dbGetQuery(database,'
                          select * from experiments e
-                         inner join configfile f
-                            on e.id = f.id
-                         inner join configInstances i
-                            on f.id = i.id'
+                         inner join configfile f on e.id = f.expId
+                         inner join configInstances i on f.id = i.configfileId
+                         group by i.configfileId '
                          )
   return(tempData)
 }
@@ -75,15 +76,33 @@ for(workflow in databaseNames) {
 }
 
 ## Separate the data following conditions and merge them for calculating pareto front
-data = read.csv("evolutionTest_core.csv")
-data1 = subset(data, data$capacityInterruptionRate == 0.25)
-data2 = subset(data, data$capacityInterruptionRate == 0.3)
+data = read.csv("workflowExperiments4_core.csv")
+data1 = subset(data, data$provisioningRate == 1.0)
+data2 = subset(data, data$provisioningRate == 0.9)
 
 newdata = cbind(data1, data2)
 write.csv(newdata, file = "newdata2.csv", row.names = FALSE)
 
 ## for calculating pareto front using jMetal
 write.table(newdata, file = "newdata2_paretocal.csv", sep=",",  col.names=FALSE, row.names = FALSE, quote = FALSE)
+
+data = read.csv("Montage_Exp1_core.csv")
+
+data1 = subset(data, data$provisioningRate == 0.9)
+write.csv(data1, file = "data1.csv", row.names = FALSE)
+colnames(data1) <- c("makespan1", "totalCosts1", "provisioningRate1", "numVmsStart1",	"numVmsTotal1", "capacityInterruptionRate1", "numInterruptions1")
+
+data2 = subset(data, data$provisioningRate == 0.8)
+write.csv(data2, file = "data2.csv", row.names = FALSE)
+colnames(data2) <- c("makespan2", "totalCosts2", "provisioningRate2", "numVmsStart2",	"numVmsTotal2", "capacityInterruptionRate2", "numInterruptions2")
+
+newdata <- order(c(1:ncol(data1), 1:ncol(data2)))
+#cbind data1 and data2, interleaving columns with x
+newdata2 <- cbind(data1, data2)[,newdata]
+write.csv(newdata2, file = "newdata2.csv", row.names = FALSE)
+
+#newdata = cbind(data1, data2)
+#write.csv(newdata, file = "newdata.csv", row.names = FALSE)
 
 ## Run jMetal to calculate the Pareto front
 #### setwd("/Users/phuong/PhD/Programs/jMetal")
