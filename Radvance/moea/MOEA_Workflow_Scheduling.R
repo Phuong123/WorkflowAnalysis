@@ -107,6 +107,35 @@ write.csv(newdata2, file = "newdata2.csv", row.names = FALSE)
 ## Run jMetal to calculate the Pareto front
 #### setwd("/Users/phuong/PhD/Programs/jMetal")
 #### system("./generatePareto_ver2.sh", wait=FALSE)
+### Merge all files for plotting
+setwd("/Users/phuong/rworkspace/WorkflowAnalysis/Radvance/moea/montagedata/pareto")
+databaseNames2 = c("Montage_Exp2","Montage_Exp3","Montage_Exp4","Montage_Exp5")  	
+
+file.copy("Montage_Exp1_core_cal-pareto.csv", "all_pareto_solutions.csv")
+
+data = read.csv("all_pareto_solutions.csv", header = FALSE)
+for(workflow in databaseNames2) {
+  
+  fileName = paste(workflow, "_core_cal-pareto", ".csv", sep = "")
+  data2 = read.csv(fileName, header = FALSE)
+  data  = rbind(data, data2)
+  
+}
+
+colnames(data) <- c("makespan1", "makespan2", "totalCosts1", "totalCosts2", "provisioningRate1", "provisioningRate2", 
+                    "numVmsStart1", "numVmsStart2", "capacityInterruptionRate1", "capacityInterruptionRate2",
+                    "numInterruptions1",  "numInterruptions2", "numVmsTotal1", "numVmsTotal2"
+)
+write.csv(data, file = "all_solutions.csv", row.names = FALSE)
+
+data = read.csv("Montage_Exp1_core_cal-pareto.csv")
+colnames(data) <- c("makespan1", "makespan2", "totalCosts1", "totalCosts2", "provisioningRate1", "provisioningRate2", 
+                    "numVmsStart1", "numVmsStart2", "capacityInterruptionRate1", "capacityInterruptionRate2",
+                    "numInterruptions1",  "numInterruptions2", "numVmsTotal1", "numVmsTotal2")
+data$Name = "Montage_Exp1"
+write.csv(data, file = "Montage_Exp1_core_cal_pareto_plot.csv", row.names = FALSE)
+
+
 
 ## Plotting the Pareto front
 
